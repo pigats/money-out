@@ -1,0 +1,20 @@
+<h2>Sign up</h2>
+<form {{action 'createUser' on='submit'}}>
+  <ul>
+    <li>
+      email:
+      {{ input type="email" value=email }}
+      {{#each model.errors.email as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+    <li>
+      password:
+      {{ input type="password" value=password }}
+      {{#each model.errors.password as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+  </ul>
+  <input type="submit" value="Sign up" />
+</form>
