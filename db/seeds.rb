@@ -6,4 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create({ email: 'andreapigato@gmail.com', password: '123456' });
+users = User.create([{
+  email: 'andreapigato@gmail.com',
+  password: '123456'
+}])
+
+expenses = Expense.create([{
+  user: users.first,
+  date: Time.now,
+  description: 'ice cream',
+  amount: 10.58,
+  comment: 'should I expense ice cream?'
+}])
