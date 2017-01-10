@@ -1,5 +1,7 @@
 <h1>MoneyOut 💸</h1>
-{{user-widget}}
+{{#unless isLogin}}
+  {{user-widget}}
+{{/unless}}
 <hr />
 {{outlet}}
 
