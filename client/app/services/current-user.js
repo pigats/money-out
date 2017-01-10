@@ -7,9 +7,7 @@ export default Ember.Service.extend({
 
     load() {
         if(this.get('session.isAuthenticated')) {
-            return this.get('store').queryRecord('user', { me: true }).then(user => {
-                this.set('user', user);
-            }).catch(() => this.get('session').invalidate());
+            return this.get('store').queryRecord('user', { me: true }).then(user => this.set('user', user)).catch(() => this.get('session').invalidate());
         }
     }
 });
