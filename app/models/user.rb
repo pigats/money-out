@@ -4,6 +4,8 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :email, format: { with: /@{1}/, message: 'should be a valid email address' }
 
+  has_many :expenses
+
   def avatar_url
     "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email)}"
   end
@@ -12,7 +14,7 @@ class User < ApplicationRecord
     true
   end
 
-  def as_json(options)
-    super(options.merge(except: 'password_digest', methods: :avatar_url))
+  def is_admin
+    false
   end
 end

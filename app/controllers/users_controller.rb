@@ -27,7 +27,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user, status: :created, location: @user
     else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+      render json: @user, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: { errors: @user.errors }, status: :unprocessable_entity
+      render json: @user, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
@@ -57,7 +57,7 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email, :password)
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:email, :password])
     end
 
     def authorize_user

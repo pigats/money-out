@@ -1,14 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    session: Ember.inject.service('session'),
+
     actions: {
         createUser() {
-            let user = this.get('model');
-            user.set('email', this.get('email'));
-            user.set('password', this.get('password'));
+            this.set('model.email', this.get('email'));
+            this.set('model.password', this.get('password'));
 
-            user.save();
-            
+            this.get('model').save().then(() =>
+                this.get('session').authenticate('authenticator:jwt', this.get('model.email'), this.get('model.password'))
+            );
         }
     }
 });

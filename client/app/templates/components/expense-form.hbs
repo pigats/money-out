@@ -1,0 +1,33 @@
+<form {{action action on='submit'}}>
+  <ul>
+    <li>
+      date:
+      {{ input value=expense.date }}
+      {{#each expense.errors.date as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+    <li>
+      description:
+      {{ input value=expense.description }}
+      {{#each expense.errors.description as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+    <li>
+      amount:
+      {{ input type='number' step='0.01' value=expense.amount }}
+      {{#each expense.errors.amount as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+    <li>
+      comment:
+      {{ input value=expense.comment }}
+      {{#each expense.errors.comment as |error|}}
+        {{error.message}}
+      {{/each}}
+    </li>
+  </ul>
+  <input type="submit" value={{submit}} />
+</form>
