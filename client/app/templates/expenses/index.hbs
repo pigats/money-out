@@ -1,0 +1,28 @@
+{{#link-to 'expenses.new'}}New Expense{{/link-to}}
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Date and Time</th>
+      <th>Comments</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  {{#each model as |expense|}}
+    <tr>
+      <td>{{expense.description}}</td>
+      <td>{{expense.amountInDollars}}</td>
+      <td>{{expense.date}}</td>
+      <td>{{expense.comment}}</td>
+      <td>
+        {{#link-to 'expenses.edit' expense}}edit{{/link-to}}
+        <a href="#" {{action 'deleteExpense' expense}}>delete</a>
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
+{{outlet}}

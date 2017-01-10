@@ -10,6 +10,10 @@ Router.map(function() {
   this.route('users', function() {
     this.route('new');
   });
+  this.route('expenses', function() {
+    this.route('new');
+    this.route('edit', { path: ':expense_id/edit' });
+  });
   this.route('login');
 });
 

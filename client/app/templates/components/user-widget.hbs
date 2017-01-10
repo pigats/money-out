@@ -1,6 +1,6 @@
 {{#unless session.isAuthenticated}}
   {{log-in}}
 {{else}}
-  <img src="{{me.user.avatar_url}}" />
+  <img src="{{me.user.avatar-url}}" />
   {{log-out}}
 {{/unless}}
