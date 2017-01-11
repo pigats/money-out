@@ -1,4 +1,15 @@
 {{#link-to 'expenses.new'}}New Expense{{/link-to}}
+<br />
+<form {{action 'filter' on='submit'}}>
+  description{{input value=description}}
+  <br />
+  date from {{input value=dateFrom}} to {{input value=dateTo}}
+  <br />
+  amount from {{input value=amountFrom}} to {{input value=amountTo}}
+  <br />
+  {{input type='submit' value='filter'}}
+</form>
+<br />
 <table>
   <thead>
     <tr>
@@ -25,4 +36,8 @@
   {{/each}}
   </tbody>
 </table>
+total: {{model.meta.total-expense}}
+{{#if daily-average-expense}}
+  average daily expense: {{daily-average-expense}} in {{model.meta.number-of-days}} days
+{{/if}}
 {{outlet}}

@@ -7,7 +7,12 @@ export default ApplicationAdapter.extend({
 
     urlForCreateRecord(modelName, snapshot) {
         return this.scopeWithUser(this._super(...arguments), snapshot.belongsTo('user', { id: true }));
-    }
+    },
 
+    urlForQuery(query, modelName) {
+        let userId = query.userId;
+        delete query.userId;
+        return this.scopeWithUser(this._super(...arguments), userId);
+    }
 
 });
