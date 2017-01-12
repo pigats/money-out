@@ -6,11 +6,12 @@ Rails.application.routes.draw do
     # password reset
     post 'users/password-reset' => 'users#create_password_reset'
     patch 'users/password-reset' => 'users#password_reset'
+    # email confirm
+    patch 'users/:id/confirm' => 'users#email_confirm'
 
     resources :users do
       resources :expenses, shallow: true
     end
-
 
     get 'expenses' => 'expenses#all'
     post 'session' => 'user_token#create'
