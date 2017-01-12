@@ -9,6 +9,14 @@
 users = User.create([{
   email: 'andreapigato@gmail.com',
   password: '123456'
+},{
+  email: 'user-manager@email.com',
+  password: '123456',
+  role: 1
+},{
+  email: 'admin@email.com',
+  password: '123456',
+  role: 2
 }])
 
 expenses = Expense.create([{
