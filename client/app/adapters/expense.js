@@ -10,9 +10,13 @@ export default ApplicationAdapter.extend({
     },
 
     urlForQuery(query, modelName) {
-        let userId = query.userId;
-        delete query.userId;
-        return this.scopeWithUser(this._super(...arguments), userId);
+        let url = this._super(...arguments);
+        if(query && query.userId) {
+            const userId = query.userId;
+            delete query.userId;
+            url = this.scopeWithUser(this._super(...arguments), userId);
+        }
+        return url;
     }
 
 });

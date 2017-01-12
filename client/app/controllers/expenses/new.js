@@ -4,14 +4,10 @@ export default Ember.Controller.extend({
     me: Ember.inject.service('current-user'),
 
     actions: {
-        createExpense(params) {
-            this.set('model.date', new Date(params.get('date')));
-            this.set('model.description', params.get('description'));
-            this.set('model.amount', params.get('amount'));
-            this.set('model.comment', params.get('comment'));
-            this.set('model.user', this.get('me.user'));
-
-            this.get('model').save().then(() => this.transitionToRoute('expenses'));
+        createExpense(expense) {
+            expense.set('date', new Date(expense.get('date')));
+            expense.set('user', this.get('me').get('user'));
+            expense.save().then(() => this.transitionToRoute('expenses.index'));
         }
     }
 });

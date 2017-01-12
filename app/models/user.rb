@@ -8,6 +8,9 @@ class User < ApplicationRecord
 
   default_scope { order('created_at DESC') }
 
+  before_save :create_confirm_email_token, if: :email_has_changed?
+  after_save :send_confirm_email_token, if: :email_has_changed?
+
   def avatar_url
     "https://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(self.email)}"
   end
@@ -20,4 +23,25 @@ class User < ApplicationRecord
     role > 1
   end
 
+  def confirmed?
+    self.email_confirm_token.nil?
+  end
+
+  def self.generate_token
+    Digest::SHA1.hexdigest([Time.now, rand].join)
+  end
+
+  private
+
+    def email_has_changed?
+      self.email_changed?
+    end
+
+    def send_confirm_email_token
+      UserMailer.email_confirm(self).deliver
+    end
+
+    def create_confirm_email_token
+      self.email_confirm_token = User.generate_token
+    end
 end

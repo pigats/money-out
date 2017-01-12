@@ -1,6 +1,7 @@
 {{#link-to 'admin.expenses.new'}}New Expense{{/link-to}}
 user 
 {{user-select action=(action 'filterUser') model=model.expenses users=model.users default=true}}
+total {{model.expenses.meta.total-expense}}
 <table>
   <thead>
     <tr>

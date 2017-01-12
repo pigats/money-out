@@ -1,0 +1,10 @@
+<form {{action 'confirmUser' on='submit'}}>
+  <ul>
+    <li>
+      token:
+      {{input type='text' value=model.email-confirm-token focus-in=(action (mut email-confirm-token-error) '')}}
+      {{email-confirm-token-error}}
+    </li>
+  </ul>
+  <input type="submit" value="Confirm">
+</form>
