@@ -7,7 +7,7 @@ class ExpensesController < ApplicationController
   def all
     @expenses = Expense.all.reorder('user_id ASC, created_at DESC')
 
-    render json: @expenses
+    render json: @expenses, meta: compute_stats
   end
 
   # GET /expenses
@@ -84,7 +84,7 @@ class ExpensesController < ApplicationController
       @user = User.find(params[:user_id])
     end
 
-    def compute_stats(dates)
+    def compute_stats dates = nil
       stats = {
         total_expense: @expenses.map(&:amount).inject(0, :+)
       }

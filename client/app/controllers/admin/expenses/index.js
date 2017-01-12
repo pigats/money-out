@@ -12,9 +12,9 @@ export default Ember.Controller.extend({
 
         filterUser(userId) {
             if(!Ember.isEmpty(userId)) {
-                this.get('store').query('expense', { userId }).then(model =>this.set('model.expenses', model));
+                this.get('store').query('expense', { userId }).then(model => this.set('model.expenses', model));
             } else {
-                this.get('store').findAll('expense').then(model => this.set('model.expenses', model));
+                this.get('store').query('expense', {}).then(model => this.set('model.expenses', model));
             }
         }
     }
