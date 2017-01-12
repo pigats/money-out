@@ -1,0 +1,10 @@
+<h2>Edit User</h2>
+<form {{action 'editUser' model on='submit'}}>
+  <ul>
+    <li>email: {{model.email}}</li>
+    <li>
+      role: {{user-role-select user=model roles=roles}}
+    </li>
+  </ul>
+  <input type="submit" value="Update User" />
+</form>

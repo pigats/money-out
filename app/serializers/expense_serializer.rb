@@ -1,3 +1,4 @@
 class ExpenseSerializer < ActiveModel::Serializer
-  attributes :id, :user_id, :date, :amount, :description, :comment
+  attributes :id, :date, :amount, :description, :comment
+  belongs_to :user
 end

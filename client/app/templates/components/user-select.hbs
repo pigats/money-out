@@ -1,0 +1,12 @@
+<select onchange={{action action value='target.value'}}>
+  {{#if default}}
+    <option value=""></option>
+  {{/if}}
+  {{#each users as |user|}}
+    {{#if (eq model.user.id user.id)}}
+      <option value="{{user.id}}" selected>{{user.email}}</option>
+    {{else}}
+      <option value="{{user.id}}">{{user.email}}</option>
+    {{/if}}
+  {{/each}}
+</select>

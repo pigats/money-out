@@ -10,6 +10,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     },
 
     model() {
-        return this.get('me').user.get('expenses');
+        //return this.get('me').get('user').get('expenses');
     }
 });

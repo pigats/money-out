@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
             this.set('model.comment', params.get('comment'));
             this.set('model.user', this.get('me.user'));
 
-            this.get('model').save().then(() => this.transitionToRoute('expenses')).catch(errors => console.log());
+            this.get('model').save().then(() => this.transitionToRoute('expenses'));
         }
     }
 });

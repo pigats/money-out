@@ -7,9 +7,6 @@ export default Ember.Controller.extend({
         return +this.get('model.meta.total-expense')/+this.get('model.meta.number-of-days');
     }),
 
-    init() {
-    },
-
     actions: {
         deleteExpense(expense) {
             if(window.confirm(`Are you sure you want to delete ${expense.get('description')}?`)) {
@@ -33,7 +30,7 @@ export default Ember.Controller.extend({
             if(amount.from && amount.to) {
                 query.amount = amount;
             }
-            this.get('store').query('expense', query).then((model) => this.set('model', model));
+            this.get('store').query('expense', query).then(model => this.set('model', model));
         }
     }
 });
