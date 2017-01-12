@@ -1,0 +1,9 @@
+<select onchange={{action (mut user.role) value='target.value'}}>
+  {{#each roles as |role|}}
+    {{#if (eq user.role role.value)}}
+      <option value="{{role.value}}" selected>{{role.name}}</option>
+    {{else}}
+      <option value="{{role.value}}">{{role.name}}</option>
+    {{/if}}
+  {{/each}}
+</select>

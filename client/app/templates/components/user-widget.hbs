@@ -2,5 +2,5 @@
   {{log-in}}
 {{else}}
   <img src="{{me.user.avatar-url}}" />
-  {{log-out}}
+  {{#link-to 'users.edit'}}Edit{{/link-to}}|{{log-out}}
 {{/unless}}

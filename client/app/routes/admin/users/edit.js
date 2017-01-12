@@ -4,12 +4,14 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
     me: Ember.inject.service('current-user'),
 
-    setupController() {
+    beforeModel() {
         this._super(...arguments);
-        this.get('controller').send('filter');
+        if(!this.get('me').get('user.is-user-admin')) {
+            this.transitionTo('expenses.index');
+        }
     },
 
-    model() {
-        //return this.get('me').get('user').get('expenses');
+    model(params) {
+        return this.get('store').findRecord('user', params.user_id);
     }
 });

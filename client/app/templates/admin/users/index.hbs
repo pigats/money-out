@@ -1,0 +1,27 @@
+{{#link-to 'admin.users.new'}}New User{{/link-to}}
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>User</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+ {{#each model as |user|}}
+    <tr>
+      <td><img src="{{user.avatar-url}}?s=30"></td>
+      <td>{{user.email}} {{#if (eq user.email me.user.email)}}(you){{/if}}</td>
+      <td>{{user.role-in-words}}</td>
+      <td>
+        {{#if (gte me.user.role user.role) }}
+          {{#link-to 'admin.users.edit' user}}edit{{/link-to}}
+          <a href="#" {{action 'deleteUser' user}}>delete</a>
+        {{/if}}
+      </td>
+    </tr>
+  {{/each}}
+  </tbody>
+</table>
