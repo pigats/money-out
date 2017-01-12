@@ -1,8 +1,7 @@
 class ExpensesController < ApplicationController
   before_action :authenticate_user
-  before_action :authorize_user, only: [:all, :index, :all, :create]
   before_action :set_expense, only: [:show, :update, :destroy]
-  before_action :set_user, only: :create
+  before_action :authorize_user
 
   def all
     @expenses = Expense.all.reorder('user_id ASC, created_at DESC')
@@ -32,12 +31,14 @@ class ExpensesController < ApplicationController
 
   # POST /expenses
   def create
-    @expense = Expense.new(expense_params.merge(user_id: params[:user_id]))
+    user = User.find(params[:user_id])
+
+    @expense = Expense.new(expense_params.merge(user: user))
     p @expense
     p expense_params
 
     if @expense.save
-      render json: @expense, status: :created, location: user_expenses_url(@user, @expense)
+      render json: @expense, status: :created, location: user_expenses_url(user, @expense)
     else
       render json: @expense, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end end 
@@ -63,7 +64,6 @@ class ExpensesController < ApplicationController
       rescue ActiveRecord::RecordNotFound => e
         authorize_user and raise e
       end
-      authorize_user
     end
 
     # Only allow a trusted parameter "white list" through.
@@ -81,7 +81,6 @@ class ExpensesController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:user_id])
     end
 
     def compute_stats dates = nil
