@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
     email: DS.attr('string'),
@@ -8,11 +9,11 @@ export default DS.Model.extend({
     expenses: DS.hasMany('expense', {async: true}),
 
     'is-user-admin': Ember.computed('role', function() {
-        return this.get('role') > 0
+        return this.get('role') > 0;
     }),
 
     'is-admin': Ember.computed('role', function() {
-        return this.get('role') === 2
+        return this.get('role') > 1;
     }),
 
     'role-in-words': Ember.computed('role', function() {

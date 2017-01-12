@@ -17,7 +17,7 @@ class User < ApplicationRecord
   end
 
   def is_admin?
-    role == 2
+    role > 1
   end
 
 end
