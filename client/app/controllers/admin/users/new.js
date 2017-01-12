@@ -8,12 +8,8 @@ export default Ember.Controller.extend({
 
     actions: {
 
-        createUser(params) {
-            this.set('model.email', params.get('email'));
-            this.set('model.password', params.get('password'));
-            this.set('model.role', params.get('role'));
-
-            this.get('model').save().then(() =>
+        createUser(user) {
+            user.save().then(() =>
                 this.transitionToRoute('admin.users.index')
             );
         }
