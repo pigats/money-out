@@ -1,8 +1,14 @@
 class ExpensesController < ApplicationController
   before_action :authenticate_user
-  before_action :authorize_user, only: [:index, :create]
+  before_action :authorize_user, only: [:all, :index, :all, :create]
   before_action :set_expense, only: [:show, :update, :destroy]
   before_action :set_user, only: :create
+
+  def all
+    @expenses = Expense.all.reorder('user_id ASC, created_at DESC')
+
+    render json: @expenses
+  end
 
   # GET /expenses
   def index
@@ -14,7 +20,7 @@ class ExpensesController < ApplicationController
       amounts = (params[:amount][:from]..params[:amount][:to])
     end
 
-    @expenses = Expense.where(user_id: params[:user_id]).dates_between(dates).amount_between(amounts).description_like(params[:description])
+    @expenses = Expense.of_user(params[:user_id]).dates_between(dates).amount_between(amounts).description_like(params[:description])
 
     render json: @expenses, meta: compute_stats(dates)
   end
@@ -62,11 +68,12 @@ class ExpensesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def expense_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:date, :description, :amount, :comment])
+      allowed_params = ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:date, :description, :amount, :comment, :user])
+      current_user.is_admin? ? allowed_params : allowed_params.except(:user_id)
     end
 
     def authorize_user
-      (render status: :unauthorized and return false) unless current_user.is_admin or
+      (render status: :forbidden and return false) unless current_user.is_admin? or
                                                               (params[:user_id] and params[:user_id].to_i == current_user.id) or
                                                               (@expense and @expense.user == current_user)
 

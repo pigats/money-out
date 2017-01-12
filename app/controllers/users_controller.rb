@@ -33,7 +33,7 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
+    if @user.update(user_params_for_update)
       render json: @user
     else
       render json: @user, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
@@ -42,7 +42,11 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    if current_user.role >= @user.role
+      @user.destroy
+    else
+      render status: :forbidden
+    end
   end
 
   private
@@ -57,11 +61,27 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:email, :password])
+      allowed_params = ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:email, :password, :role])
+      if(allowed_params[:role])
+        allowed_params[:role] = [allowed_params[:role].to_i, current_user.role].min
+      end
+
+      allowed_params
+    end
+
+    def user_params_for_update
+      # only a user can change its own credentials
+      allowed_params = current_user == @user ? user_params : user_params.except(:email, :password)
+
+      if(current_user.role < @user.role)
+        allowed_params.except!(:role)
+      end
+
+      allowed_params
     end
 
     def authorize_user
-      (render status: :unauthorized and return false) unless current_user.is_user_manager or @user == current_user
+      (render status: :forbidden and return false) unless current_user.is_user_manager? or @user == current_user
 
       return true
     end

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :expenses, shallow: true
     end
+    get 'expenses' => 'expenses#all'
     post 'session' => 'user_token#create'
   end
 
