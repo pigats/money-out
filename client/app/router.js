@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('new');
     this.route('edit');
     this.route('password-reset');
+    this.route('confirm');
   });
   this.route('expenses', function() {
     this.route('new');

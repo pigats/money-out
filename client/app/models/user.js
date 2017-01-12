@@ -3,6 +3,8 @@ import Ember from 'ember';
 
 export default DS.Model.extend({
     email: DS.attr('string'),
+    'email-confirm-token': DS.attr('string'),
+    'confirmed?': DS.attr('boolean'),
     'avatar-url': DS.attr('string'),
     password: DS.attr('string'),
     role: DS.attr('number', { defaultValue: 0 }),

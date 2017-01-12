@@ -8,5 +8,13 @@ export default ApplicationAdapter.extend({
             url += '/me';
         }
         return url;
+    },
+
+    urlForUpdateRecord(id, modelName, snapshot) {
+        let url = this._super(...arguments);
+        if(snapshot.adapterOptions && snapshot.adapterOptions.confirm) {
+            url += '/confirm';
+        }
+        return url;
     }
 });
