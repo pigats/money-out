@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, except: :create
+  before_action :authenticate_user, except: [:create, :create_password_reset, :password_reset]
   before_action :authorize_user, only: :index
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -49,6 +49,26 @@ class UsersController < ApplicationController
     end
   end
 
+  # password reset
+  def create_password_reset
+    @user = User.where(email: user_params_for_password_reset[:email]).first
+    password_reset_token = Digest::SHA1.hexdigest([Time.now, rand].join)
+    if(@user and @user.update(password_reset_token: password_reset_token))
+      UserMailer.password_reset(@user).deliver_later
+    end
+  end
+
+  def password_reset
+    token = user_params_for_password_reset[:password_reset_token]
+    users = User.where(password_reset_token: token)
+    render status: :not_found and return if token.nil? or users.empty? or users.size != 1
+
+    @user = users.first
+    unless @user.update(password: user_params_for_password_reset[:password], password_reset_token: nil)
+      render json: @user, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -78,6 +98,10 @@ class UsersController < ApplicationController
       end
 
       allowed_params
+    end
+
+    def user_params_for_password_reset
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params, only: [:email, :password, :'password-reset-token'], keys: { :'password-reset-token' => :password_reset_token })
     end
 
     def authorize_user
