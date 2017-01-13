@@ -2,7 +2,7 @@ import DS from 'ember-data';
 import Ember from 'ember';
 
 export default DS.Model.extend({
-    date: DS.attr('date', {defaultValue: new Date()}),
+    date: DS.attr('date'),
     description: DS.attr('string'),
     amount: DS.attr('number'),
     comment: DS.attr('string'),

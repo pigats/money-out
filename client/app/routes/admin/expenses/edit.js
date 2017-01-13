@@ -15,5 +15,10 @@ export default Ember.Route.extend({
             expense: this.get('store').findRecord('expense', params.expense_id),
             users: this.get('store').findAll('user')
         });
+    },
+
+    setupController(controller, model) {
+        this._super(...arguments);
+        controller.set('expense-date', model.expense.get('date').toString());
     }
 });
