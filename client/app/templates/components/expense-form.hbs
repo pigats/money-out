@@ -2,7 +2,7 @@
   <ul>
     <li>
       date:
-      {{ input value=expense.date }}
+      {{ date-field human-value=date on-change=(action 'setDate') }}
       {{#each expense.errors.date as |error|}}
         {{error.message}}
       {{/each}}

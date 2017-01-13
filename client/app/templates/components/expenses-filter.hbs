@@ -1,0 +1,22 @@
+<form>
+  <ul>
+    <li>
+      <label for="description">Description</label>
+      {{input name='description' value=description}}
+    </li>
+    <li>
+      Date
+      <label for="date-from">from</label>
+      {{date-field name='date-from' human-value=human-date-from on-change=(action 'setDateFrom')}} 
+      <label for="date-to">to</label>
+      {{date-field name='date-to' human-value=human-date-to on-change=(action 'setDateTo')}}
+    </li>
+    <li>
+      Amount 
+      <label for="amount-from">from</label>
+      {{input name='amount-from' value=amountFrom}}
+      <label for="amount-to">to</label>
+      {{input name='amount-to' value=amountTo}}
+    </li>
+  </ul>
+</form>
