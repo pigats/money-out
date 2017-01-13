@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
         createPasswordResetToken() {
             if(!Ember.isEmpty(this.get('model.email'))) {
                 this.get('model').save().finally(() => this.set('hasToken', true));
-            };
+            }
         },
 
         resetPassword() {
