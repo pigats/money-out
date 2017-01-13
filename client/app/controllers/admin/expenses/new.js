@@ -9,7 +9,6 @@ export default Ember.Controller.extend({
         },
 
         createExpense(expense) {
-            expense.set('date', new Date(expense.get('date')));
             expense.save().then(() => this.transitionToRoute('admin.expenses.index'));
         }
     }

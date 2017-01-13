@@ -1,5 +1,5 @@
 <h2>New Expense</h2>
-{{#expense-form expense=model.expense action=(action 'createExpense' model.expense) submit='Create'}}
+{{#expense-form expense=model.expense date='today' action=(action 'createExpense' model.expense) submit='Create'}}
   <li>
     user:
     {{user-select action=(action 'setUser') model=model.expense users=model.users}}

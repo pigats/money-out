@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user, except: [:create, :create_password_reset, :password_reset]
   before_action :set_user, only: [:show, :update, :destroy, :email_confirm]
-  before_action :authorize_user, only: [:show, :update, :destroy, :email_confirm]
-
+  before_action :authorize_user, except: [:create, :create_password_reset, :password_reset]
 
   # GET /users
   def index

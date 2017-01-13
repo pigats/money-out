@@ -1,14 +1,6 @@
 {{#link-to 'expenses.new'}}New Expense{{/link-to}}
 <br />
-<form {{action 'filter' on='submit'}}>
-  description{{input value=description}}
-  <br />
-  date from {{input value=dateFrom}} to {{input value=dateTo}}
-  <br />
-  amount from {{input value=amountFrom}} to {{input value=amountTo}}
-  <br />
-  {{input type='submit' value='filter'}}
-</form>
+{{expenses-filter action='filter'}}
 <br />
 <table>
   <thead>

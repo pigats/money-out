@@ -1,6 +1,6 @@
 class Expense < ApplicationRecord
   belongs_to :user
-  validates :description, :amount, presence: true
+  validates :date, :description, :amount, presence: true
   validates :amount, numericality: { other_than: 0 }
 
   default_scope { order('date DESC') }

@@ -13,7 +13,9 @@ class ExpensesController < ApplicationController
   def index
 
     if(params[:date] and params[:date][:from] and params[:date][:to])
-      dates = (DateTime.parse(params[:date][:from])..DateTime.parse(params[:date][:to]))
+      from = DateTime.parse(params[:date][:from])
+      to = DateTime.parse(params[:date][:to])
+      dates = (from..to) unless from > to
     end
     if(params[:amount] and params[:amount][:from] and params[:amount][:to])
       amounts = (params[:amount][:from]..params[:amount][:to])
@@ -32,10 +34,7 @@ class ExpensesController < ApplicationController
   # POST /expenses
   def create
     user = User.find(params[:user_id])
-
     @expense = Expense.new(expense_params.merge(user: user))
-    p @expense
-    p expense_params
 
     if @expense.save
       render json: @expense, status: :created, location: user_expenses_url(user, @expense)
