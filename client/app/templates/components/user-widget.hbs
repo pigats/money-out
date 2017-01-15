@@ -1,6 +1,15 @@
-{{#unless session.isAuthenticated}}
-  {{log-in}}
-{{else}}
-  <img src="{{me.user.avatar-url}}" />
-  {{#link-to 'users.edit'}}Edit{{/link-to}}|{{log-out}}
-{{/unless}}
+{{#if session.isAuthenticated}}
+  <div class="me">
+    <img class="me-avatar" src="{{me.user.avatar-url}}?s=50" />
+    <div class="me-details">
+      <p class="me-email">{{me.user.email}}</p>
+      <p class="actions me-actions">
+        {{#unless me.user.confirmed?}}
+        {{#link-to 'users.confirm' class="me-confirm-email-link"}}Confirm email{{/link-to}}
+        {{/unless}}
+        {{#link-to 'users.edit'}}Edit{{/link-to}}
+        {{log-out tagName=''}}
+      </p>
+    </div>
+  </div>
+{{/if}}

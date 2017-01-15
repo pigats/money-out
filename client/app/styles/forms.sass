@@ -1,0 +1,54 @@
+@import 'colors'
+
+form ul
+  list-style-type: none
+  padding-left: 0
+
+input[type=text], input[type=password], input[type=email], input[type=number], select
+  width: 16em
+  padding: 4px 5px 5px
+  border: 1px solid $border-color
+  border-radius: 2px
+  font-size: 1em
+  margin-bottom: 10px
+
+input[type=submit], .button
+  box-sizing: border-box
+  padding: 9px 10px
+  font-size: .75em
+  text-align: center
+  min-width: 10em
+
+  color: white !important
+  border: 1px solid lighten($button-color, 5%)
+  border-color: white !important
+  display: inline-block
+  border-radius: 2px
+  background: $button-color
+  text-decoration: none
+
+  -moz-appearance: none
+  -webkit-appearance: none
+  outline: none
+
+
+  &:active
+    box-shadow: 0 4px 4px darken($button-color, 5%) inset
+
+  &:hover
+    background: lighten($button-color, 5%)
+
+label
+  display: block
+  font:
+    size: 0.8em
+    style: italic
+
+.error
+  color: $error
+  font-style: italic
+
+.date
+  font:
+    size: 0.8em
+    style: italic

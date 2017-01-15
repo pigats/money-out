@@ -1,22 +1,23 @@
-<form>
+<form class="filter">
   <ul>
-    <li>
-      <label for="description">Description</label>
+    <li class="filter-item {{description-status}}">
+      <h3>Description</h3>
+      <label for="description">Keyword (min 3 characters)</label>
       {{input name='description' value=description}}
     </li>
-    <li>
-      Date
+    <li class="filter-item {{date-status}}">
+      <h3>Date</h3>
       <label for="date-from">from</label>
       {{date-field name='date-from' human-value=human-date-from on-change=(action 'setDateFrom')}} 
       <label for="date-to">to</label>
       {{date-field name='date-to' human-value=human-date-to on-change=(action 'setDateTo')}}
     </li>
-    <li>
-      Amount 
+    <li class="filter-item {{amount-status}}">
+      <h3>Amount</h3>
       <label for="amount-from">from</label>
-      {{input name='amount-from' value=amountFrom}}
+      {{input name='amount-from' type='number' step='0.01' value=amountFrom}}
       <label for="amount-to">to</label>
-      {{input name='amount-to' value=amountTo}}
+      {{input name='amount-to' type='number' step='0.01' value=amountTo}}
     </li>
   </ul>
 </form>

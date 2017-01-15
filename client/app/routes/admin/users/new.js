@@ -13,5 +13,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
     model() {
         return this.get('store').createRecord('user');
+    },
+
+    actions: {
+        willTransition() {
+            this.get('currentModel').rollbackAttributes();
+            this._super(...arguments);
+        }
     }
+
+
 });

@@ -1,8 +1,15 @@
-{{#link-to 'admin.expenses.new'}}New Expense{{/link-to}}
-user 
-{{user-select action=(action 'filterUser') model=model.expenses users=model.users default=true}}
-total {{model.expenses.meta.total-expense}}
-<table>
+<h2>Expenses management</h2>
+{{#link-to 'admin.expenses.new' class='button'}}New expense{{/link-to}}
+
+<form class="filter">
+  <ul>
+    <li>
+      <label for="user">filter by user</label>
+      {{user-select action=(action 'filterUser') model=model.expenses users=model.users default=true tagName=''}}
+    </li>
+  </ul>
+</form>
+<table class="expenses">
   <thead>
     <tr>
       <th>User</th>
@@ -15,16 +22,13 @@ total {{model.expenses.meta.total-expense}}
   <tbody>
   
  {{#each model.expenses as |expense|}}
-    <tr>
-      <td>{{expense.user.email}} {{#if (eq expense.user.email me.user.email)}}(you){{/if}}</td>
-      <td>{{expense.date}}</td>
-      <td>{{expense.description}}</td>
-      <td>{{expense.amountInDollars}}</td>
-      <td>
-          {{#link-to 'admin.expenses.edit' expense.id}}edit{{/link-to}}
-        <a href="#" {{action 'deleteExpense' expense}}>delete</a>
-      </td>
-    </tr>
+    {{admin-expense-item expense=expense delete='deleteExpense' tagName=''}}
   {{/each}}
   </tbody>
 </table>
+<ul class="expenses-stats">
+  <li class="expenses-stats-stat">
+    Total: 
+    {{amount-in-dollars model.expenses.meta.total-expense}}
+  </li>
+</ul>

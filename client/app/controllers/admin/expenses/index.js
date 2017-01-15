@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
     actions: {
         deleteExpense(expense) {
             if(window.confirm(`Are you sure you want to delete ${expense.get('description')}?`)) {
+                this.decrementProperty('model.expenses.meta.total-expense', expense.get('amount'));
                 expense.destroyRecord();
             }
         },

@@ -33,7 +33,7 @@ export default DS.Model.extend({
     roleInWords(roleId) {
         switch(roleId) {
             case 0: return 'user';
-            case 1: return 'users admin';
+            case 1: return 'user manager';
             case 2: return 'admin';
         }
     }

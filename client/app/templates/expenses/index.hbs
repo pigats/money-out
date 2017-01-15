@@ -1,8 +1,10 @@
-{{#link-to 'expenses.new'}}New Expense{{/link-to}}
-<br />
-{{expenses-filter action='filter'}}
-<br />
-<table>
+<h2>My expenses</h2>
+{{#link-to 'expenses.new' class='button'}}New expense{{/link-to}}
+<a href="" {{action 'toggleFilter'}} class="button">Filter</a>
+{{#if show-filter}}
+  {{expenses-filter action='filter'}}
+{{/if}}
+<table class="expenses">
   <thead>
     <tr>
       <th>Description</th>
@@ -13,23 +15,24 @@
     </tr>
   </thead>
   <tbody>
-  
   {{#each model as |expense|}}
-    <tr>
-      <td>{{expense.description}}</td>
-      <td>{{expense.amountInDollars}}</td>
-      <td>{{expense.date}}</td>
-      <td>{{expense.comment}}</td>
-      <td>
-        {{#link-to 'expenses.edit' expense}}edit{{/link-to}}
-        <a href="#" {{action 'deleteExpense' expense}}>delete</a>
-      </td>
-    </tr>
+    {{expense-item expense=expense delete='deleteExpense' tagName=''}}
   {{/each}}
   </tbody>
 </table>
-total: {{model.meta.total-expense}}
-{{#if daily-average-expense}}
-  average daily expense: {{daily-average-expense}} in {{model.meta.number-of-days}} days
-{{/if}}
-{{outlet}}
+
+<ul class="expenses-stats">
+  <li class="expenses-stats-stat">
+    Total: 
+    {{amount-in-dollars model.meta.total-expense}}
+  </li>
+  {{#if model.meta.number-of-days}}
+    <li class="expenses-stats-stat">
+      Daily average: 
+      {{amount-in-dollars daily-average-expense}} 
+      <span class="expenses-stats-n-days">
+        (in {{model.meta.number-of-days}} days)
+      </span>
+    </li>
+  {{/if}}
+</ul>

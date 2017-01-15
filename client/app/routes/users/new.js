@@ -6,5 +6,12 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, {
 
     model() {
         return this.get('store').createRecord('user');
+    },
+
+    actions: {
+        willTransition() {
+            this.get('currentModel').rollbackAttributes();
+            this._super(...arguments);
+        }
     }
 });

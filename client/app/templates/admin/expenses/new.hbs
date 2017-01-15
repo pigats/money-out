@@ -1,7 +1,7 @@
-<h2>New Expense</h2>
+<h2>Create expense</h2>
 {{#expense-form expense=model.expense date='today' action=(action 'createExpense' model.expense) submit='Create'}}
   <li>
-    user:
-    {{user-select action=(action 'setUser') model=model.expense users=model.users}}
+    <label for="user">user</label>
+    {{user-select action=(action 'setUser') model=model.expense users=model.users tagName=''}}
   </li>
 {{/expense-form}}

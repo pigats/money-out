@@ -1,0 +1,16 @@
+<tr class="user-item">
+  <td>
+    <img src="{{user.avatar-url}}?s=30">
+    {{user.email}}
+    {{#if (eq user.email me.user.email)}}
+      <span class="me-flag">(you)</span>
+    {{/if}}
+  </td>
+  <td>{{user.role-in-words}}</td>
+  <td class="actions">
+    {{#if (gte me.user.role user.role) }}
+      {{#link-to 'admin.users.edit' user}}Edit{{/link-to}}
+      <a href="#" {{action 'deleteUser' user}}>Delete</a>
+    {{/if}}
+  </td>
+</tr>

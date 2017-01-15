@@ -1,0 +1,26 @@
+<nav class="navigation-bar">
+  <ul class="navigation">
+  {{#if session.isAuthenticated}}
+    <li class="navigation-item">
+      {{#link-to 'expenses.index'}}My expenses{{/link-to}}
+    </li>
+    {{#if me.user.is-user-admin}}
+      <li class="navigation-item">
+        {{#link-to 'admin.users.index'}}Users management{{/link-to}}
+      </li>
+    {{/if}}
+    {{#if me.user.is-admin}}
+      <li class="navigation-item">
+        {{#link-to 'admin.expenses.index'}}Expenses management{{/link-to}}
+      </li>
+    {{/if}}
+  {{else}}
+    <li class="navigation-item">
+      {{#link-to 'users.new'}}Sign up{{/link-to}}
+    </li> 
+    <li class="navigation-item">
+      {{#link-to 'login'}}Log in{{/link-to}}
+    </li> 
+  {{/if}}
+  </ul>
+</nav>
