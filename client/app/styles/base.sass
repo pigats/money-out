@@ -1,0 +1,40 @@
+@import 'colors'
+
+body
+  font:
+    size: 16px
+    family: sans-serif
+  color: $text
+
+table
+  width: 100%
+  border-collapse: collapse
+  text-align: left
+  margin: 20px 0
+
+thead 
+  tr
+    background: $table-header
+    color: $table-header-text
+
+  th
+    text-shadow: 0 -1px black
+
+tbody tr
+    &:nth-of-type(odd)
+      background: $stripes-odd
+
+    &:nth-of-type(even)
+      background: $stripes-even
+
+th, td
+  padding: 9px 5px
+
+footer
+  font-size: .75em
+  text-align: center
+
+a
+  text-decoration: none
+  border-bottom-width: 1px
+  border-bottom-style: solid

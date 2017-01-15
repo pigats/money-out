@@ -1,22 +1,23 @@
 <form autocomplete="off" {{action action on='submit'}}>
   <ul>
     <li>
-      email:
-      {{ input type="email" value=user.email }}
+      <label for="email">email</label>
+      {{input name='email' type='email' value=user.email }}
       {{#each user.errors.email as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     <li>
-      password:
-      {{ input type="password" value=user.password }}
+      <label for="password">password (min 6 characters)</label>
+      {{input name='password' type='password' value=user.password }}
       {{#each user.errors.password as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     {{#if roles}}
       <li>
-        role: {{user-role-select user=user roles=roles}}
+        <label for="role">role</label>
+        {{user-role-select user=user roles=roles tagName=''}}
       </li>
     {{/if}}
   </ul>

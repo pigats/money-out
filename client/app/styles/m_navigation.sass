@@ -1,0 +1,29 @@
+@import 'colors'
+
+.navigation-bar
+  float: left
+  width: 100%
+  border-top: 1px solid $navigation-item-active-background
+
+.navigation
+  margin: 0
+  padding: 0
+  list-style-type: none
+
+.navigation-item
+  float: left
+  margin-right: 10px
+
+  a
+    display: block
+    text-align: center
+    padding: 9px 20px
+    border: 1px solid $navigation-item-active-background
+    border-top: none
+
+    &, &:visited
+      color: $text !important
+
+    &:hover, &.active
+      color: $navigation-item-active-text !important
+      background: $navigation-item-active-background

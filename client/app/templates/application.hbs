@@ -1,10 +1,13 @@
-<h1>MoneyOut 💸</h1>
-{{#unless isLogin}}
+<header class="header">
+  <h1 class="header-name">
+    <span class="header-name-money">money</span><span class="header-name-out">out</span> 💸
+  </h1>
   {{user-widget}}
-{{/unless}}
-<hr />
-{{outlet}}
-
-<footer>
-  moneyout is an example app built for toptal
+</header>
+{{navigation-bar}}
+<section>
+  {{outlet}}
+</section>
+<footer class="footer">
+  moneyout is an example app built for toptal &middot; <a href="mailto:andrea@fruktarbo.com">andrea pigato</a>👨🏻‍💻❤️
 </footer>

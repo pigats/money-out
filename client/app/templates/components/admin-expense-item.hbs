@@ -1,0 +1,16 @@
+<tr class="expense-item">
+  <td>
+    <img src="{{expense.user.avatar-url}}?s=30">
+    {{expense.user.email}}
+    {{#if (eq expense.user.email me.user.email)}}
+      <span class="me-flag">(yours)</span>
+    {{/if}}
+  </td>
+  <td>{{expense.date}}</td>
+  <td>{{expense.description}}</td>
+  <td>{{expense.amountInDollars}}</td>
+  <td class="actions">
+      {{#link-to 'admin.expenses.edit' expense.id}}Edit{{/link-to}}
+    <a href="#" {{action 'deleteExpense' expense}}>Delete</a>
+  </td>
+</tr>

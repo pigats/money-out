@@ -9,6 +9,6 @@ export default DS.Model.extend({
     user: DS.belongsTo('user', {async: true}),
 
     amountInDollars: Ember.computed('amount', function() {
-        return `${this.get('amount').toFixed(2)} $`
+        return `${this.get('amount').toFixed(2)}$`;
     })
 });

@@ -1,0 +1,10 @@
+<tr class="expense-item">
+  <td>{{expense.description}}</td>
+  <td>{{expense.amountInDollars}}</td>
+  <td>{{expense.date}}</td>
+  <td>{{expense.comment}}</td>
+  <td class="actions">
+    {{#link-to 'expenses.edit' expense}}Edit{{/link-to}}
+    <a href="#" {{action 'deleteExpense' expense}}>Delete</a>
+  </td>
+</tr>

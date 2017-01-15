@@ -1,9 +1,12 @@
-<form {{action 'confirmUser' on='submit'}}>
+<h2>Confirm your email</h2>
+<p>After signing up or changing your email, a token will be sent to your account's email address. Use it to confirm your email.</p>
+
+<form class="confirm" {{action 'confirmUser' on='submit'}}>
   <ul>
     <li>
-      token:
-      {{input type='text' value=model.email-confirm-token focus-in=(action (mut email-confirm-token-error) '')}}
-      {{email-confirm-token-error}}
+      <label for="token">token</label>
+      {{input name='token' type='text' value=model.email-confirm-token focus-in=(action (mut email-confirm-token-error) '')}}
+      <span class="error">{{email-confirm-token-error}}</span>
     </li>
   </ul>
   <input type="submit" value="Confirm">

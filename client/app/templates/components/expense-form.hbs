@@ -1,31 +1,31 @@
 <form {{action action on='submit'}}>
   <ul>
     <li>
-      date:
-      {{ date-field human-value=date on-change=(action 'setDate') }}
+      <label for="date">date</label>
+      {{date-field human-value=date on-change=(action 'setDate') tagName=''}}
       {{#each expense.errors.date as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     <li>
-      description:
-      {{ input value=expense.description }}
+      <label for="description">description</label>
+      {{input name='description' value=expense.description}}
       {{#each expense.errors.description as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     <li>
-      amount:
-      {{ input type='number' step='0.01' value=expense.amount }}
+      <label for="amount">amount</label>
+      {{input name='amount' type='number' step='0.01' value=expense.amount}}
       {{#each expense.errors.amount as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     <li>
-      comment:
-      {{ input value=expense.comment }}
+      <label for="comment">comment</label>
+      {{input name='comment' value=expense.comment}}
       {{#each expense.errors.comment as |error|}}
-        {{error.message}}
+        <span class="error">{{error.message}}</span>
       {{/each}}
     </li>
     {{yield}}

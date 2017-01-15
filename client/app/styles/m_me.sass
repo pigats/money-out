@@ -1,0 +1,39 @@
+.me
+  float: right
+  min-width: 18em
+  margin-top: 18px
+
+.me-avatar
+  display: block
+  float: left
+  margin-right: 5px
+
+.me-email
+  font-size: .8em
+
+.me-details
+  float: left
+
+.me-email, .me-actions
+  margin: 9px 0 0
+
+.me-flag
+  font-size: .8em
+
+@keyframes alert
+  0%
+    background: $alert-background
+    color: $alert-text
+    border-bottom-color: $alert-text
+  100% 
+    background: transparent
+    color: $text
+    border-bottom-color: $text
+
+.me-confirm-email-link
+  background: $alert-background
+  color: $alert-text
+  border-bottom-color: $alert-text
+  animation: alert .5s linear infinite alternate
+  padding: 0 5px
+

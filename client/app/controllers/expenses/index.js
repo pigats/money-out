@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     me: Ember.inject.service('current-user'),
+    'show-filter': true,
 
     'daily-average-expense': Ember.computed('model.meta.total-expense', 'model.meta.number-of-days', function() {
         return +this.get('model.meta.total-expense')/+this.get('model.meta.number-of-days');
@@ -27,6 +28,11 @@ export default Ember.Controller.extend({
                 query,
                 500
             );
+        },
+
+        toggleFilter() {
+            this.toggleProperty('show-filter');
         }
+
     }
 });

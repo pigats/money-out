@@ -3,7 +3,7 @@ import Ember from 'ember';
 import config from '../config/environment';
 
 export default Base.extend({
-    authenticationEndpoint: `${config.host}/session`,
+    authenticationEndpoint: `${config.api_host}/api/session`,
 
     restore(data) {
         return new Ember.RSVP.Promise((resolve, reject) => {
@@ -24,7 +24,7 @@ export default Base.extend({
         });
 
         return new Ember.RSVP.Promise((resolve, reject) => {
-            return $.ajax({
+            return Ember.$.ajax({
                 url: this.get('authenticationEndpoint'),
                 type: 'POST',
                 data: payload,
