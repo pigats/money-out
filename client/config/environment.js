@@ -44,7 +44,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
+    ENV.api_host = 'https://moneyout.herokuapp.com';
   }
 
   return ENV;
