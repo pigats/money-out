@@ -162,6 +162,17 @@ RSpec.describe "Users", type: :request do
           expect(@user.authenticate(password)).not_to be false
         end
 
+        it 'can not upgrade my role' do
+          role = @user.role
+          patch user_path(@user), params: payload_for(:update_user, {
+            email: 'test@test.com',
+            role: role + 1
+          }), headers: @user_headers
+
+          expect(response).to have_http_status(:success)
+          expect(@user.reload.role).to be role
+        end
+
         it 'can not update others' do
           patch user_path(@user.id + 1), headers: @user_headers
           expect(response).to have_http_status(:forbidden)
@@ -276,6 +287,15 @@ RSpec.describe "Users", type: :request do
 
           expect(response).to have_http_status(:success)
           expect(@another_user_manager.reload.role).to equal role
+        end
+
+        it 'can not upgrade a user to more than user manager' do
+          patch user_path(@user), params: payload_for(:update_user, {
+            role: @user_manager.role + 1
+          }), headers: @user_manager_headers
+
+          expect(response).to have_http_status(:success)
+          expect(@user.reload.role).to be @user_manager.role
         end
 
         it 'can not update admins\' roles' do

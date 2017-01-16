@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
   validates :email, uniqueness: true
   validates :email, format: { with: /@{1}/, message: 'should be a valid email address' }
-  validates :role, numericality: { only_integer: { less_than_or_equal_to: 2 }, message: 'should be a valid role' }
+  validates :role, inclusion: { in: (0..2), message: 'should be a valid role' }
+
 
   default_scope { order('created_at DESC') }
 
