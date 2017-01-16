@@ -97,3 +97,17 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+def payload_for action, opts = {}
+  payload = JSON.parse(File.read("#{__dir__}/payloads/#{action}.json"))
+  payload['data']['attributes'].merge!(opts)
+  payload.to_json
+end
+
+def headers
+  { 'CONTENT_TYPE' => 'application/vnd.api+json' }
+end
+
+def token_for user
+  Knock::AuthToken.new(payload: { sub: user.id }).token
+end

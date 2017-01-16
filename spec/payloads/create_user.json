@@ -1,0 +1,9 @@
+{
+    "data": {
+        "attributes": {
+            "email": "test@test.com",
+            "password": "test-test"
+        },
+        "type": "users"
+    }
+}
