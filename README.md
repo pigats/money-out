@@ -1,4 +1,4 @@
-# Moneyout 💸
+# MoneyOut 💸
 
 expenses tracking for humans 👫 and machines 🤖
 
