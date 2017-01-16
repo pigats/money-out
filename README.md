@@ -4,7 +4,7 @@ expenses tracking for humans 👫 and machines 🤖
 
 ## Components
 
-- 🤖 Rails powered json/jsonap RESTful API, with jwt authentication
+- 🤖 Rails powered json/jsonapi RESTful API, with jwt authentication
   - http://rubyonrails.org/
   - http://jsonapi.org/
   - https://jwt.io/
