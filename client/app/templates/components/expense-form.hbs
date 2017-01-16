@@ -15,7 +15,7 @@
       {{/each}}
     </li>
     <li>
-      <label for="amount">amount</label>
+      <label for="amount">amount in $</label>
       {{input name='amount' type='number' step='0.01' value=expense.amount}}
       {{#each expense.errors.amount as |error|}}
         <span class="error">{{error.message}}</span>
