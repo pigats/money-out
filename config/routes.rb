@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     post 'users/password-reset' => 'users#create_password_reset'
     patch 'users/password-reset' => 'users#password_reset'
     # email confirm
-    patch 'users/:id/confirm' => 'users#email_confirm'
+    patch 'users/:id/confirm' => 'users#email_confirm', as: 'user_email_confirm'
 
     resources :users do
       resources :expenses, shallow: true

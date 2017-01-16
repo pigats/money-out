@@ -1,0 +1,11 @@
+{
+    "data": {
+        "attributes": {
+            "amount": 10.5,
+            "comment": "test",
+            "date": "2017-01-16T11:00:00.000Z",
+            "description": "this is a test"
+        },
+        "type": "expenses"
+    }
+}

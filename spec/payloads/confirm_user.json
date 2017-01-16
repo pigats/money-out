@@ -1,0 +1,8 @@
+{
+    "data": {
+        "attributes": {
+            "email-confirm-token": "placeholder"
+        },
+        "type": "users"
+    }
+}
