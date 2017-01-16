@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "api/users", type: :request do
+RSpec.describe "Users", type: :request do
   after :each do
     User.all.each do |user|
       user.destroy
