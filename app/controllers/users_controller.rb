@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     render json: @users
   end
 
-  # GET /users/1
+  # GET /users/:id
   def show
     render json: @user
   end
@@ -31,25 +31,28 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1
+  # PATCH /users/:id
   def update
-    if @user.update(user_params_for_update)
+    if current_user.role < @user.role
+      render status: :forbidden
+    elsif @user.update(user_params_for_update)
       render json: @user
     else
       render json: @user, status: :unprocessable_entity, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 
-  # DELETE /users/1
+  # DELETE /users/:id
   def destroy
-    if current_user.role >= @user.role
-      @user.destroy
-    else
+    if current_user.role < @user.role
       render status: :forbidden
+    else
+      @user.destroy
     end
   end
 
   # password reset
+  # POST /users/password-reset
   def create_password_reset
     @user = User.where(email: user_params_for_password_reset[:email]).first
     password_reset_token = User.generate_token
@@ -58,6 +61,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # PATCH /users/password-reset
   def password_reset
     token = user_params_for_password_reset[:password_reset_token]
     users = User.where(password_reset_token: token)
@@ -69,6 +73,8 @@ class UsersController < ApplicationController
     end
   end
 
+  # email confirm
+  # PATCH /users/:id/confirm
   def email_confirm
     token = user_params_for_email_confirm[:email_confirm_token]
 
@@ -103,13 +109,7 @@ class UsersController < ApplicationController
 
     def user_params_for_update
       # only a user can change its own credentials
-      allowed_params = current_user == @user ? user_params : user_params.except(:email, :password)
-
-      if(current_user.role < @user.role)
-        allowed_params.except!(:role)
-      end
-
-      allowed_params
+      current_user == @user ? user_params : user_params.except(:email, :password)
     end
 
     def user_params_for_password_reset
