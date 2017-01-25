@@ -6,7 +6,6 @@ export default Ember.Controller.extend({
     actions: {
         updateUser(params) {
             this.set('model.email', params.get('email'));
-            this.set('passwordChanged', );
 
             if(!Ember.isEmpty(params.get('password'))) {
                 this.set('model.password', params.get('password'));
